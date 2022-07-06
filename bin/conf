@@ -1,5 +1,5 @@
 contents="bashcms_contents"
-contents_owner="ryuyamada"
+contents_owner="tychy"
 wwwdir="/var/www"
 contentsdir="$wwwdir/$contents"
-appdir="$wwwdir/$bashcms"
+appdir="$wwwdir/bashcms"
