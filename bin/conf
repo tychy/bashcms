@@ -1,0 +1,5 @@
+contents="bashcms_contents"
+contents_owner="ryuyamada"
+wwwdir="/var/www"
+contentsdir="$wwwdir/$contents"
+appdir="$wwwdir/$bashcms"
