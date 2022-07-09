@@ -5,3 +5,5 @@ contentsdir="$wwwdir/$contents"
 appdir="$wwwdir/bashcms"
 viewdir="$appdir/view"
 logdir="/var/log/$contents"
+datadir="${contentsdir}_data"
+export LANG=js_JP.UTF-8
