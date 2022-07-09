@@ -59,7 +59,7 @@ tmp=/tmp/$$
 cd "$datadir"
 find posts pages -type f    |
 grep created_time           |
-xargs grep -H               |
+xargs grep -H .             |
 sed 's;/created_time:; ;'   |
 awk '{print $2,$3,$1}'      |
 sort -k1,2                  |
@@ -69,5 +69,19 @@ mv $tmp-post_list "$datadir/post_list"
 
 # LIST PAGES DATA
 
-awk '$3~/^pages/'           > $tmp-paeg_list
+awk '$3~/^pages/' $tmp-list > $tmp-page_list
 mv $tmp-page_list "$datadir/page_list"
+
+### MAKE PREV/NEXT NAVIGATION LINK ###
+cat "$datadir/post_list"    |
+while read ymd hms d ; do
+    grep -C1 " $d$" "$datadir/post_list" |
+    awk '{print $3}'                     |
+    sed -n -e '1p' -e '$p'               |
+    xargs -I@ cat "$datadir/@/link"      |
+    awk 'NR<=2{print}END{for(i=NR;i<2;i++) {print "LOST TITLE"}}' |
+    sed -e '1s/^/prev:/' -e '2s/^/next:/'|
+    tr '\n' ' ' > "$datadir/$d/nav"
+done
+
+rm -f $tmp-*
