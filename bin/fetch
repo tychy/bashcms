@@ -50,3 +50,24 @@ while read d ; do
     awk -v d="$d" '{gsub(/s\//,"=",d);print "<a href=\"/?" d "\">" $0 "</a>"}' > "$datadir/$d/link"
     touch "$datadir/$d/nav"
 done
+
+### MAKE POST/PAGE LIST ###
+
+tmp=/tmp/$$
+
+# LIST POSTS DATA
+cd "$datadir"
+find posts pages -type f    |
+grep created_time           |
+xargs grep -H               |
+sed 's;/created_time:; ;'   |
+awk '{print $2,$3,$1}'      |
+sort -k1,2                  |
+tee $tmp-list               |
+awk '$3~/^posts/'           > $tmp-post_list
+mv $tmp-post_list "$datadir/post_list"
+
+# LIST PAGES DATA
+
+awk '$3~/^pages/'           > $tmp-paeg_list
+mv $tmp-page_list "$datadir/page_list"
