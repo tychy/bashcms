@@ -1,5 +1,5 @@
 * {margin:0; padding:0;}
-body { max-width:1000px; }
+body { max-width:1300px; }
 article, nav, header, footer, aside, li {display:block; float:left; }
 footer { width:100%; clear:both; font-size:70% }
 ul { margin-left:30px; }
@@ -8,7 +8,7 @@ a { color:red; text-decoration:none; }
 #page-header { text-align:center; width:100%; padding:20px 0px; }
 #page-header a { color:black; }
 #page-header li { padding:3px; border-bottom:1px black solid; border-left:1px black solid; margin:3px; }
-#article { padding:20px; min-width:300px; max-width:600px; }
+#article { padding:20px; min-width:300px; max-width:900px; }
 #article-header { width:100%; color:white; font-size:70%; background-color:#555; margin:10px 0px; }
 #article-header a { color:white; }
 #article-body { max-width:75%; min-width:320px; clear:both; }
