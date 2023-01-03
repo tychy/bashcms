@@ -4,11 +4,24 @@ source "$(dirname $0)/conf"
 exec 2> "$logdir/$(basename $0).$(date + %Y%m%d_%H%M%S).$$"
 
 [ -n "${CONTENT_LENGTH}" ] && dd bs=${CONTENT_LENGTH} > /dev/null
+tmp=/tmp/$$
 
 echo -e 'Content-type: text/html\n\n'
 
 cd "$contentsdir"
+git fetch origin main
+git diff --name-status HEAD origin/main |
+grep -Eo '(posts|pages)/[^/]+'          |
+sort -u > $tmp-git-change
+
 git pull
+
+[-f "$datadir/INIT"] &&
+find posts pages -type d    |
+grep -Eo '(posts|pages)/[^/]+' > $tmp-git-change
+
+rm -f "$datadir/INIT"
+cat $tmp-git-change > /tmp/diff
 
 ### CREATE TIMESTAMP FILES IF NOT EXIST ###
 find posts pages -maxdepth 1 -type d |
