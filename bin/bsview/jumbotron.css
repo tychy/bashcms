@@ -2,7 +2,11 @@
 body {
   padding-top: 3.5rem;
 }
+img {
+    max-width: 100%;
+}
 
 #article-info p{font-size:80%}
 #widgets h1{font-size:160%}
 #widgets a{font-size:80%}
+
